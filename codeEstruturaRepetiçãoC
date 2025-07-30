@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+int main() {
+    int senha;
+    int resultado;
+    int tentativas = 0;
+    const int MAX_TENTATIVAS = 5;
+
+    do {
+        printf("Digite a senha: ");
+        resultado = scanf("%d", &senha);
+
+        if (resultado != 1) {
+            printf("Senha Incorreta.\n\n");
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF);
+            tentativas++;
+            if (tentativas == 4) {
+                printf("AVISO: SE ERRAR MAIS UMA VEZ, SUA CONTA SERÁ BLOQUEADA\n");
+            }
+            continue;
+        }
+
+        if (senha == 123) {
+            printf("Senha Válida!\n");
+            break;
+        } else {
+            tentativas++;
+            if (tentativas == 4) {
+                printf("AVISO: SE ERRAR MAIS UMA VEZ, SUA CONTA SERÁ BLOQUEADA.\n\n");
+            } else if (tentativas < MAX_TENTATIVAS) {
+                printf("Senha Incorreta.\n\n");
+            }
+        }
+
+    } while (tentativas < MAX_TENTATIVAS);
+
+    if (tentativas == MAX_TENTATIVAS) {
+        printf("Conta Bloqueada.\n");
+    }
+
+    return 0;
+}
